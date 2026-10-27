@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   SavoirPlus — Design System
+   Charte graphique UTA : Vert UTA #1E7B34 / Violet ISCAT #5B2A86
+   ========================================================================== */
+
+@theme {
+  /* Couleurs de marque */
+  --color-uta:     #1E7B34;
+  --color-profond: #166029;
+  --color-clair:   #3FAE5A;
+  --color-violet:  #5B2A86;
+  --color-ardoise: #4B5563;
+  --color-encre:   #111827;
+  --color-casse:   #F7F8F7;
+  --color-ligne:   #E5E7EB;
+
+  /* Palette verte étendue */
+  --color-uta-50:  #EDFBF1;
+  --color-uta-100: #D5EEDB;
+  --color-uta-200: #ACD9B8;
+
+  /* Typographie */
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* Rayons */
+  --radius-card: 1.25rem;
+  --radius-btn:  0.75rem;
+
+  /* Ombres */
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0/.07), 0 1px 2px -1px rgb(0 0 0/.07);
+  --shadow-lift: 0 8px 32px -4px rgb(30 123 52/.14), 0 2px 8px -2px rgb(30 123 52/.10);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-casse);
+  color: var(--color-encre);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   Composants partagés
+   ========================================================================== */
+
+/* --- Cartes --- */
+.card {
+  background: #fff;
+  border: 1px solid var(--color-ligne);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+.card-hover {
+  transition: box-shadow 200ms, transform 200ms;
+}
+.card-hover:hover {
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-2px);
+}
+
+/* --- Boutons --- */
+.btn-primary, .btn-secondary, .btn-ghost, .btn-violet, .btn-danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-btn);
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background-color 200ms, color 200ms, box-shadow 200ms, transform 200ms;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+}
+.btn-primary, .btn-secondary, .btn-ghost, .btn-violet, .btn-danger {
+  active: transform scale(0.98);
+}
+.btn-primary:disabled, .btn-secondary:disabled, .btn-ghost:disabled, .btn-violet:disabled, .btn-danger:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.btn-primary  { background: var(--color-uta);    color: #fff; }
+.btn-primary:hover  { background: var(--color-profond); }
+
+.btn-secondary { background: var(--color-uta-50); color: var(--color-uta); }
+.btn-secondary:hover { background: var(--color-uta-100); }
+
+.btn-ghost { background: transparent; color: var(--color-ardoise); }
+.btn-ghost:hover { background: var(--color-uta-50); color: var(--color-profond); }
+
+.btn-violet { background: var(--color-violet); color: #fff; }
+.btn-violet:hover { background: #4a2070; }
+
+.btn-danger { background: #FEF2F2; color: #B91C1C; }
+.btn-danger:hover { background: #FEE2E2; }
+
+/* --- Formulaires --- */
+.label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-encre);
+  margin-bottom: 0.375rem;
+}
+
+.input {
+  width: 100%;
+  border: 1.5px solid var(--color-ligne);
+  border-radius: var(--radius-btn);
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  font-family: var(--font-sans);
+  color: var(--color-encre);
+  background: #fff;
+  outline: none;
+  transition: border-color 150ms, box-shadow 150ms;
+}
+.input:focus {
+  border-color: var(--color-uta);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-uta) 15%, transparent);
+}
+.input::placeholder { color: #9CA3AF; }
+
+select.input { appearance: none; cursor: pointer; }
+
+textarea.input { resize: vertical; min-height: 7rem; }
+
+/* --- Badges --- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 9999px;
+  padding: 0.2rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* --- Modale native <dialog> --- */
+.modal {
+  background: #fff;
+  border: none;
+  border-radius: var(--radius-card);
+  box-shadow: 0 24px 64px -12px rgb(0 0 0/.25);
+  padding: 0;
+  margin: auto; /* Tailwind preflight remet la marge à 0 : le <dialog> n'était plus centré */
+  width: min(560px, calc(100vw - 2rem));
+  max-height: 92dvh;
+  overflow: hidden;
+}
+.modal::backdrop {
+  background: rgb(17 24 39 / 0.5);
+  backdrop-filter: blur(4px);
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+  0%, 100% { transform: rotate(var(--r, 0)) translateY(0); }
+  50%       { transform: rotate(var(--r, 0)) translateY(-6px); }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.animate-fade-up  { animation: fade-up 0.45s cubic-bezier(.22,1,.36,1) both; }
+.animate-float    { animation: float 4s ease-in-out infinite; }
+.animate-spin     { animation: spin 1s linear infinite; }
+.animate-pulse    { animation: pulse 2s cubic-bezier(.4,0,.6,1) infinite; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
