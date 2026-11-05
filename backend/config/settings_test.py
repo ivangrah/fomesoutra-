@@ -1,7 +1,7 @@
-"""Réglages des tests : variables définies avant l'import des réglages normaux."""
+﻿"""RÃ©glages des tests : variables dÃ©finies avant l'import des rÃ©glages normaux."""
 import os
 
-os.environ.setdefault("SECRET_KEY", "test-secret-key")
+os.environ.setdefault("SECRET_KEY", "cle-de-test-uniquement-assez-longue-pour-jwt-0123456789")
 os.environ.setdefault("SECURE_SSL_REDIRECT", "0")
 os.environ.setdefault("STORAGE_BACKEND", "local")
 os.environ.pop("DATABASE_URL", None)
